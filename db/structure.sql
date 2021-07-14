@@ -96,7 +96,6 @@ ALTER SEQUENCE public.deliveries_id_seq OWNED BY public.deliveries.id;
 CREATE TABLE public.goods (
     id bigint NOT NULL,
     name character varying,
-    "unique" character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -137,7 +136,6 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.storages (
     id bigint NOT NULL,
     name character varying,
-    "unique" character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     region public.region_enum
@@ -291,7 +289,21 @@ CREATE INDEX index_deliveries_on_storage_id ON public.deliveries USING btree (st
 -- Name: index_deliveries_on_storage_id_and_good_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_deliveries_on_storage_id_and_good_id ON public.deliveries USING btree (storage_id, good_id);
+CREATE INDEX index_deliveries_on_storage_id_and_good_id ON public.deliveries USING btree (storage_id, good_id);
+
+
+--
+-- Name: index_goods_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_goods_on_name ON public.goods USING btree (name);
+
+
+--
+-- Name: index_storages_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_storages_on_name ON public.storages USING btree (name);
 
 
 --

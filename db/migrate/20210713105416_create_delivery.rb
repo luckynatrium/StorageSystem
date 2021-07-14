@@ -7,7 +7,7 @@ class CreateDelivery < ActiveRecord::Migration[6.1]
       t.integer :quanity
       t.timestamps
     end
-    add_index :deliveries, [:storage_id, :good_id], unique: true
+    add_index :deliveries, [:storage_id, :good_id]
   end
 
   def down
