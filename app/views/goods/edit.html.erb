@@ -1,0 +1,5 @@
+<%= form_with model: @good, url: good_path(@good), method: :put do |form| %>
+  <%= form.label :name, "Name" %>
+  <%= form.text_field :name %>
+  <%= form.submit "Save" %>
+<% end %>

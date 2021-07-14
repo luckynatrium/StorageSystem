@@ -7,11 +7,11 @@
 
 <% @storages.each do |storage| %>                    
     <tr>
-      <td><%= storage.name %><td>
-      <td><%= storage.created_at.to_s(:db) %></td>
-      <td><%= link_to "Go to Storage", storage %>
-      <%= link_to "Create Storage", new_storage_url %>
-      <%= link_to "Delete Storage", storage %></td> 
+      <td><%= storage.name %></td>
+      <td><%= storage.created_at.strftime("%I:%M%p %m/%d/%Y") %></td>
+      <td><%= link_to "Go to Storage", storage, class: "my-button" %>
+      <%= link_to "Create", new_storage_url, class: "my-button" %>
+      <%= link_to "Delete", storage, class: "my-button" %></td> 
     </tr>
   <% end %>
 </table>

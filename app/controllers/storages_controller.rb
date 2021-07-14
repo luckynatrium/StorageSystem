@@ -11,12 +11,12 @@ class StoragesController < ApplicationController
     @storage = Storage.new(storage_params)
     begin
       if @storage.save!
-        flash.now[:notice] =  "Storage was successfully created"
+        redirect_to storages_url, notice: "Storage was successfully created"
       else
-        flash.now[:alert] = "Storage wasn't created!!!!"
+        redirect_to new_storage_url, notice: "Storage wasn't created!!!!"
       end
     rescue ActiveRecord::RecordNotUnique
-      flash.now[:alert] = "Storage with exactly the same name is already in database"
+      redirect_to new_storage_url, notice: "Storage with exactly the same name is already in database"
     end
   end
 

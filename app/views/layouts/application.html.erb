@@ -11,6 +11,11 @@
   </head>
 
   <body>
+  <nav>
+  <%= link_to "List of storages", storages_url, class: "my-button"%>
+
+  <%= link_to "List of goods", goods_url, class: "my-button"%>
+  </nav>
   <% flash.each do |type, msg| %>
   <div>
     <%= msg %>

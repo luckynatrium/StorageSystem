@@ -1,0 +1,20 @@
+<table margin = 0 auto>
+<tr>
+  <th>Name</th>
+  <th>Created At</th>
+  <th>Updated At</th>
+  <th>Actions</th>
+</tr>
+
+<% @goods.each do |good| %>                    
+    <tr>
+      <td><%= good.name %></td>
+      <td><%= good.created_at.strftime("%I:%M%p %m/%d/%Y") %></td>
+      <td><%= good.updated_at.strftime("%I:%M%p %m/%d/%Y") %></td>
+      <td>
+        <%= link_to "Edit", edit_good_path(good), class: "my-button" %>
+        <%= link_to "Delete", good_path(good), method: :delete, class: "my-button" %>
+      </td> 
+    </tr>
+  <% end %>
+</table>
