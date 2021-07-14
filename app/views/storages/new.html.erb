@@ -1,0 +1,7 @@
+<%= form_with model: @storage do |form| %>
+  <%= form.label :name, "Name" %>
+  <%= form.text_field :name %>
+  <%= form.label :region, "Region" %>
+  <%= form.select :region, Storage.regions.map { |key, value| [key.humanize, key] }%>
+  <%= form.submit "Save" %>
+<% end %>

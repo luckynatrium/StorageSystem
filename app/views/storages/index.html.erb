@@ -1,0 +1,17 @@
+<table>
+<tr>
+  <th>Name</th>
+  <th>Created At</th>
+  <th>Actions</th>
+</tr>
+
+<% @storages.each do |storage| %>                    
+    <tr>
+      <td><%= storage.name %><td>
+      <td><%= storage.created_at.to_s(:db) %></td>
+      <td><%= link_to "Go to Storage", storage %>
+      <%= link_to "Create Storage", new_storage_url %>
+      <%= link_to "Delete Storage", storage %></td> 
+    </tr>
+  <% end %>
+</table>
