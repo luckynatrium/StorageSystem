@@ -8,8 +8,8 @@
 <% @storages.each do |storage| %>                    
     <tr>
       <td><%= storage.name %></td>
-      <td><%= storage.created_at.strftime("%I:%M%p %m/%d/%Y") %></td>
-      <td><%= link_to "Go to Storage", storage, class: "my-button" %>
+      <td><%= storage.created_at.strftime("%I:%M%p %d/%m/%Y") %></td>
+      <td><%= link_to "Go to Storage", storage_stocks_url(storage.id), class: "my-button" %>
       <%= link_to "Create", new_storage_url, class: "my-button" %>
       <%= link_to "Delete", storage, class: "my-button" %></td> 
     </tr>

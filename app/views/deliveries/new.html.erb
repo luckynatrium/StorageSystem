@@ -1,0 +1,17 @@
+<%= form_with model: @delivery, url: storage_deliveries_url, method: :post do |form| %>
+<%= form.label :delivery_date, "Choose delivery date"%>
+<%= form.date_select :delivery_date %>
+  <table>
+  <tr>
+  <th>Good's names</th>
+  <th>Quantity</th>
+</tr>
+  <% @goods.each do |good| %>
+    <tr>
+    <th> <%= good.name %> </th>
+    <th> <%= form.number_field "quantity[#{good.id}]", min: 1, use_two_digit_numbers: true %> </th>
+    </tr>
+  <% end %>
+  </table>
+  <%= form.submit "Submit Delivery" %>
+<% end %>

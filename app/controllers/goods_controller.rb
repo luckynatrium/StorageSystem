@@ -14,7 +14,7 @@ class GoodsController < ApplicationController
 
   def create
     begin
-      if @good.save! good_params
+      if Good.create good_params
         redirect_to goods_url, notice: "Good was successfully created"
       else
         redirect_to new_good_url, notice: "Good wasn't created!!!!"

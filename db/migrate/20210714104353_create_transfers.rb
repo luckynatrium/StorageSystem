@@ -12,8 +12,8 @@ class CreateTransfers < ActiveRecord::Migration[6.1]
   end
 
   def down
-    drop_index :transfers, [:source_id, :destination_id]
-    drop_index :transfers, [:source_id, :destination_id, :good_id]
+    remove_index :transfers, column: [:source_id, :destination_id]
+    remove_index :transfers, column: [:source_id, :destination_id, :good_id]
     drop_table :transfers
   end
 end

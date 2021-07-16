@@ -8,9 +8,8 @@ class StoragesController < ApplicationController
   end
 
   def create
-    @storage = Storage.new(storage_params)
     begin
-      if @storage.save!
+      if Storage.create storage_params
         redirect_to storages_url, notice: "Storage was successfully created"
       else
         redirect_to new_storage_url, notice: "Storage wasn't created!!!!"

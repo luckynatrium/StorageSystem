@@ -64,7 +64,7 @@ CREATE TABLE public.deliveries (
     storage_id bigint,
     good_id bigint,
     date timestamp without time zone,
-    quanity integer,
+    quantity integer,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -127,6 +127,39 @@ ALTER SEQUENCE public.goods_id_seq OWNED BY public.goods.id;
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: stocks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.stocks (
+    id bigint NOT NULL,
+    storage_id bigint,
+    good_id bigint,
+    quantity integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: stocks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.stocks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.stocks_id_seq OWNED BY public.stocks.id;
 
 
 --
@@ -210,6 +243,13 @@ ALTER TABLE ONLY public.goods ALTER COLUMN id SET DEFAULT nextval('public.goods_
 
 
 --
+-- Name: stocks id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stocks ALTER COLUMN id SET DEFAULT nextval('public.stocks_id_seq'::regclass);
+
+
+--
 -- Name: storages id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -256,6 +296,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: stocks stocks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stocks
+    ADD CONSTRAINT stocks_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: storages storages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -297,6 +345,20 @@ CREATE INDEX index_deliveries_on_storage_id_and_good_id ON public.deliveries USI
 --
 
 CREATE UNIQUE INDEX index_goods_on_name ON public.goods USING btree (name);
+
+
+--
+-- Name: index_stocks_on_good_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_stocks_on_good_id ON public.stocks USING btree (good_id);
+
+
+--
+-- Name: index_stocks_on_storage_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_stocks_on_storage_id ON public.stocks USING btree (storage_id);
 
 
 --
@@ -350,11 +412,27 @@ ALTER TABLE ONLY public.transfers
 
 
 --
+-- Name: stocks fk_rails_34299b6004; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stocks
+    ADD CONSTRAINT fk_rails_34299b6004 FOREIGN KEY (storage_id) REFERENCES public.storages(id);
+
+
+--
 -- Name: transfers fk_rails_bb4f14833d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.transfers
     ADD CONSTRAINT fk_rails_bb4f14833d FOREIGN KEY (source_id) REFERENCES public.storages(id);
+
+
+--
+-- Name: stocks fk_rails_f58c808db0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.stocks
+    ADD CONSTRAINT fk_rails_f58c808db0 FOREIGN KEY (good_id) REFERENCES public.goods(id);
 
 
 --
@@ -368,6 +446,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210713103913'),
 ('20210713105036'),
 ('20210713105416'),
-('20210714104353');
+('20210714104353'),
+('20210715100301');
 
 

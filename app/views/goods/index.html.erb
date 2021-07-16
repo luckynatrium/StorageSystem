@@ -9,8 +9,8 @@
 <% @goods.each do |good| %>                    
     <tr>
       <td><%= good.name %></td>
-      <td><%= good.created_at.strftime("%I:%M%p %m/%d/%Y") %></td>
-      <td><%= good.updated_at.strftime("%I:%M%p %m/%d/%Y") %></td>
+      <td><%= good.created_at.strftime("%I:%M%p %d/%m/%Y") %></td>
+      <td><%= good.updated_at.strftime("%I:%M%p %d/%m/%Y") %></td>
       <td>
         <%= link_to "Edit", edit_good_path(good), class: "my-button" %>
         <%= link_to "Delete", good_path(good), method: :delete, class: "my-button" %>

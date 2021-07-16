@@ -1,0 +1,25 @@
+<table>
+<tr>
+  <th>Delivery date</th>
+  <th>Delivered goods</th>
+  <th>Last edited date</th>
+</tr>
+
+<% @deliveries.each do |date, deliveries| %>                    
+    <tr>
+      <td><%= date.strftime("%d/%m/%Y") %></td>
+      <td>
+      <% deliveries.each do |delivery| %>
+        <%= "#{delivery[:good]} - #{delivery[:quantity]}"%>
+        <br>
+      <% end %>
+      </td>
+      <td>
+      <% deliveries.each do |delivery| %>
+        <%= delivery[:good_updated_at].strftime("%I:%M%p %m/%d/%Y") %>
+        <br>
+      <% end %>
+      </td> 
+    </tr>
+  <% end %>
+</table>
