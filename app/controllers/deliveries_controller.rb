@@ -1,8 +1,10 @@
 class DeliveriesController < ApplicationController
+  include DateHelper
+  include Queries::DeliveriesQueries
+  include Deliveries
 
   def index
-    @deliveries = Delivery.all.preload(:good).map {|delivery| delivery.to_view}
-    .group_by { |delivery| delivery[:date]}
+    @deliveries = get_deliveries_grouped_by_date
     @goods = Good.all
   end
 
@@ -12,13 +14,9 @@ class DeliveriesController < ApplicationController
   end
 
   def create
-    attrs = delivery_params
-    begin
-      Delivery.transaction do
-        Delivery.create_deliveries @storage_id, attrs
-      end
+    if DeliveriesCreator.new(delivery_params).create 
       redirect_to action: "index"
-    rescue ActiveRecord::RecordInvalid => exception
+    else 
       redirect_to new_storage_delivery_url, notice: exception.message
     end
   end
@@ -26,8 +24,11 @@ class DeliveriesController < ApplicationController
   private
 
   def delivery_params
-    @storage_id = params.require(:storage_id)
-    params.require(:delivery).permit(:good_id, :storage_id,
-       "delivery_date(1i)", "delivery_date(2i)", "delivery_date(3i)", :quantity => {})
+    storage_id = params.require(:storage_id)
+    attrs = params.require(:delivery)
+    .permit("delivery_date(1i)", "delivery_date(2i)", "delivery_date(3i)", :quantity => {})
+    
+    {storage_id: storage_id, quantity: attrs[:quantity], 
+      date: extract_selected_date("delivery_date", attrs)}
   end
 end

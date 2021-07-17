@@ -8,7 +8,7 @@
 <%= form_with model: @transfer, 
     url: transfers_url(src_storage_id: @src_storage_id, dest_storage_id: @dest_storage_id), 
     method: :post do |form| %>
-<% @stocks_with_quantities.each do |stock| %>                    
+<% @stocks_quantities.each do |stock| %>                    
     <tr>
       <td><%= stock.good_name %></td>
       <td><%= stock.src_quantity %></td>

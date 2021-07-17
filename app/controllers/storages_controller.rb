@@ -1,7 +1,7 @@
 class StoragesController < ApplicationController
 
   def index
-    @storages = Storage.all
+    @storages = Storage.all.preload(:stocks)
   end
   def new
     @storage = Storage.new
@@ -16,6 +16,15 @@ class StoragesController < ApplicationController
       end
     rescue ActiveRecord::RecordNotUnique
       redirect_to new_storage_url, notice: "Storage with exactly the same name is already in database"
+    end
+  end
+
+  def destroy
+    @storage = Storage.find params[:id]
+    if @storage.destroy
+      redirect_to storages_url, notice: "Storage was successfully deleted"
+    else
+      redirect_to storages_url, notice: "A error has occur while deleting storage"
     end
   end
 

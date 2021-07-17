@@ -1,13 +1,8 @@
 class StocksController < ApplicationController
+  include Queries::StocksQueries
 
   def index
-    @stocks = Stock.joins(
-      "INNER JOIN deliveries 
-      ON deliveries.storage_id = stocks.storage_id 
-      AND deliveries.good_id = stocks.good_id")
-      .joins("JOIN goods ON stocks.good_id = goods.id")
-      .group(:quantity, :name)
-      .where(storage_id: params[:storage_id])
-      .select(:quantity, :name, "max(deliveries.date) as date")
+    @storage_id = params[:storage_id]
+    @stocks = get_stocks_with_delivery_date(@storage_id)
   end
 end

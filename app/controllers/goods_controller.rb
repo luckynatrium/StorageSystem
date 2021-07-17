@@ -37,8 +37,14 @@ class GoodsController < ApplicationController
     end
   end
   
-  def delete
-    redirect_to goods_url
+  def destroy
+    @good = Good.find params[:id]
+    if @good.destroy
+      redirect_to goods_url, notice: "Good was successfully deleted"
+    else
+      redirect_to goods_url, notice: "A error has occur while deleting good"
+    end
+    
   end
 
 private

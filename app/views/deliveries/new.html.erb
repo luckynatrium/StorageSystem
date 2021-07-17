@@ -8,8 +8,8 @@
 </tr>
   <% @goods.each do |good| %>
     <tr>
-    <th> <%= good.name %> </th>
-    <th> <%= form.number_field "quantity[#{good.id}]", min: 1, use_two_digit_numbers: true %> </th>
+    <td> <%= good.name %> </td>
+    <td> <%= form.number_field "quantity[#{good.id}]", min: 1, use_two_digit_numbers: true %></td>
     </tr>
   <% end %>
   </table>

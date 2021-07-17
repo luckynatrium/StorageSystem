@@ -203,7 +203,7 @@ CREATE TABLE public.transfers (
     source_id bigint,
     destination_id bigint,
     good_id bigint,
-    quanity integer,
+    quantity integer,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

@@ -11,7 +11,10 @@
       <td><%= storage.created_at.strftime("%I:%M%p %d/%m/%Y") %></td>
       <td><%= link_to "Go to Storage", storage_stocks_url(storage.id), class: "my-button" %>
       <%= link_to "Create", new_storage_url, class: "my-button" %>
-      <%= link_to "Delete", storage, class: "my-button" %></td> 
+      <% unless storage.has_goods? %>
+        <%= link_to "Delete", storage_path(storage), method: :delete, class: "my-button" %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
+<%= link_to "Create storage", new_storage_path, class: "my-button"%>

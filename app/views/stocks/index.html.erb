@@ -13,3 +13,7 @@
     </tr>
   <% end %>
 </table>
+<%= link_to "Create Delivery", new_storage_delivery_path(storage_id: @storage_id), class: "my-button"%>
+<%= link_to "All Deliveries", deliveries_path, class: "my-button"%>
+<%= link_to "Create Transfer", transfers_choose_path, class: "my-button"%>
+<%= link_to "All Transfers", transfers_path, class: "my-button"%>

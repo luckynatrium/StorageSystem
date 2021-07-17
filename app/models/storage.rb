@@ -9,4 +9,9 @@ class Storage < ApplicationRecord
     siberia: "siberia",
     far_eastern: "far eastern",
   }
+  has_many :stocks
+
+  def has_goods?
+    not stocks.empty?
+  end
 end
