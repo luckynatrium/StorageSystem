@@ -26,7 +26,7 @@ class DeliveriesController < ApplicationController
   private
 
   def delivery_params
-    @storage_id = params.require(:storage_id) || nil
+    @storage_id = params.require(:storage_id)
     params.require(:delivery).permit(:good_id, :storage_id,
        "delivery_date(1i)", "delivery_date(2i)", "delivery_date(3i)", :quantity => {})
   end

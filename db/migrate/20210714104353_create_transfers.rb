@@ -4,7 +4,7 @@ class CreateTransfers < ActiveRecord::Migration[6.1]
       t.references :source,  foreign_key: {to_table: :storages}
       t.references :destination,  foreign_key: {to_table: :storages}
       t.references :good
-      t.integer :quanity
+      t.integer :quantity
       t.timestamps 
     end
     add_index :transfers, [:source_id, :destination_id]

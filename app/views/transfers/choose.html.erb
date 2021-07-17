@@ -1,0 +1,7 @@
+<%= form_with url: new_transfer_url(), method: :get do |form| %>
+  <%= form.label :source, "Source storage" %>
+  <%= form.select :source_storage, @storages.map { |storage| [storage.name, storage.id]} %>
+  <%= form.label :dest, "Destination storage" %>
+  <%= form.select :dest_storage, @storages.map { |storage| [storage.name, storage.id]} %>
+  <%= form.submit "Start transfer process" %>
+<% end %>

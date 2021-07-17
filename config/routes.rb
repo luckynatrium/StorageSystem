@@ -4,5 +4,7 @@ Rails.application.routes.draw do
     resources :deliveries, only: [:index, :new, :create]
     get 'stocks', to: 'stocks#index'
   end
+  get "transfers/choose", to: 'transfers#choose'
+  resources :transfers, only: [:index, :new, :create]
   resources :goods
 end

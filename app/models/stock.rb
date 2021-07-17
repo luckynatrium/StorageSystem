@@ -5,6 +5,12 @@ class Stock < ApplicationRecord
 
   def change_quantity(delta)
     self.quantity += delta
+    puts self.quantity
     self.save!
+  end
+
+  def self.transfer_stocks(src_stock, dest_stock, quantity)
+    src_stock.change_quantity -quantity
+    dest_stock.change_quantity quantity
   end
 end

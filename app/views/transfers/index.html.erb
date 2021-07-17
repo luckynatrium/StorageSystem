@@ -1,0 +1,26 @@
+<table>
+<tr>
+  <th>Source Storage</th>
+  <th>Destination Storage</th>
+  <th>Transfer amount</th>
+  <th>Transfer date</th>
+</tr>
+<% @transfers.each do |(src_name, dest_name), transfers| %>                    
+    <tr>
+      <td><%= src_name %></td>
+      <td><%= dest_name %></td>
+      <td> 
+      <%  transfers.each do |transfer| %>
+        <%= "#{transfer.good.name} - #{transfer.quantity}" %>
+        <br>
+      <% end %>
+      </td>
+      <td>
+      <%  transfers.each do |transfer| %>
+          <%= transfer.created_at.strftime("%d/%m/%Y") %>
+          <br>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
